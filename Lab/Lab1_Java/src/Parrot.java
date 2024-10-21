@@ -1,29 +1,36 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Parrot {
 	
-	private String phrase;
+	private List<String> Phrase;
+	private Random random;
 	
-	public Parrot(String phrase) {
-		this.phrase = phrase;
+	public Parrot() {
+		this.Phrase = new ArrayList<>();
+		this.random = new Random();
+	}
+	
+	public void addPhrase(String phrase) {
+		Phrase.add(phrase);
 	}
 	
 	private void say(int repetition) {
+		String choosePhrase = Phrase.get(random.nextInt(Phrase.size()));
 		for (int i = 0; i < repetition; i++) {
-			System.out.println(phrase);
+			System.out.println(choosePhrase);
 		}
-	}
-	
-	private void change(String newPhrase) {
-		phrase = newPhrase;
 	}
 	
 	public static void main(String[] args) {
 
-		Parrot parrot = new Parrot("Hello World");
-		parrot.say(3);
+		Parrot parrot = new Parrot();
 		
-		parrot.change("Hello");
-		parrot.say(1);
+		parrot.addPhrase("Hello World");
+		parrot.addPhrase("Hello");
+		
+		parrot.say(2);
 	}
 
 }
