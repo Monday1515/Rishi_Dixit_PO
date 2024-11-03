@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>   // oba rozwiazania poprawne
 #include <vector>
 #include <string>
 #include <cstdlib>
