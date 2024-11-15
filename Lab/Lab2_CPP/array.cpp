@@ -35,7 +35,7 @@ public:
 
 };
 
-int main() {
+int main() { // Prosze tworzyc obiekty takze w pamieci dynamicznej
 
     Tablica tablica1;
     tablica1.add(0,1);
