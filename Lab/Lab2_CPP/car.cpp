@@ -4,7 +4,7 @@
 using namespace std;
 
 class Samochód {
-    string marka;
+    string marka; 
     string model;
     int rokProdukcji;
 
@@ -23,7 +23,7 @@ public:
     }
 
     ~Samochód() {
-        cout << "Destruktor wywołany dla: " << marka << " " << model << endl;
+        cout << "Destruktor wywołany dla: " << marka << " " << model << endl; // informacja o likwidacji obiektu?
     }
 
 
