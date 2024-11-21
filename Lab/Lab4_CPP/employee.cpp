@@ -7,7 +7,7 @@ protected:
     string position;
     float salary;
 
-    virtual void pokazDane() const {
+    virtual void showData() const {
         cout << "Position: " << position << endl;
         cout << "Salary: " << salary << endl;
     }
