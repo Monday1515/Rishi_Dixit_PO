@@ -3,38 +3,45 @@
 using namespace std;
 
 class Vehicle {
-public:
+protected:
+    string brand;
+    string model;
 
-    virtual void accelerate() = 0;
-    virtual ~Vehicle() {};
+public:
+    Vehicle(string Brand, string Model) {
+        brand = Brand;
+        model = Model;
+    }
 };
 
-class Car : public Vehicle {
+class Car : protected Vehicle {
 public:
 
-    void accelerate() override {
-        cout << "Car accelerates" << endl;
+    Car(string Brand, string Model) : Vehicle(Brand, Model) {}
+
+    void brandModel(string Brand, string Model) {
+        brand = Brand;
+        model = Model;
     }
     
-};
-
-class Bicycle : public Vehicle {
-public:
-
-    void accelerate() override {
-        cout << "Bicycle accelerates" << endl;
+    void showData() {
+        cout << brand << endl;
+        cout << model << endl;
     }
 };
+
 
 int main() {
-    Vehicle* vehicle1 = new Car();
-    Vehicle* vehicle2 = new Bicycle();
-    
-    vehicle1 -> accelerate();
-    vehicle2 -> accelerate();
+    Car car1("Toyota", "Corolla");
+    car1.showData();
 
-    delete vehicle1;
-    delete vehicle2;
+    car1.brandModel("Audi", "A4");
+    car1.showData();
+
+    // Car dziedziczy atrybuty chronione brand i model z klasy Vehicle
+    // Próba wywołania brand oraz model bezpośrednio w main() powoduje błąd kompilacji
+    // cout << car1.brand << endl; 
+    // cout << car1.model << endl;
 
     return 0;
 }
