@@ -5,15 +5,8 @@ using namespace std;
 class Vehicle {
 public:
 
-    virtual void accelerate() {
-        cout << "Vehicle accelerates" << endl;
-    }
-
-    void stop() {
-        cout << "Vehicle stops" << endl;
-    }
-
-    virtual ~Vehicle() {}
+    virtual void accelerate() = 0;
+    virtual ~Vehicle() {};
 };
 
 class Car : public Vehicle {
@@ -39,9 +32,6 @@ int main() {
     
     vehicle1 -> accelerate();
     vehicle2 -> accelerate();
-
-    vehicle1 -> stop();
-    vehicle2 -> stop();
 
     delete vehicle1;
     delete vehicle2;
