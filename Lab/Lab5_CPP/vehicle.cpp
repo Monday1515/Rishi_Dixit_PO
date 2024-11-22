@@ -3,61 +3,48 @@
 using namespace std;
 
 class Vehicle {
-private:
+public:
     string brand;
     string model;
 
-public:
     Vehicle(string Brand, string Model) {
-        brand = Brand;
-        model = Model;
+       brand = Brand;
+       model = Model;
     }
 
-    string getBrand() const {
-        return brand;
+    virtual void accelerate() {
+        cout << "Vehicle accelerates" << endl;
     }
 
-    string getModel() const {
-        return model;
-    }
-
-    void setBrand(string Brand) {
-        brand = Brand;
-    }
-
-    void setModel(string Model) {
-        model = Model;
-    }
 };
 
-class Car : private Vehicle {
+class Car : public Vehicle {
 public:
 
     Car(string Brand, string Model) : Vehicle(Brand, Model) {}
 
-    void brandModel(string Brand, string Model) {
-        setBrand(Brand);
-        setModel(Model);
+    void accelerate() override {
+        cout << "Car accelerates" << endl;
     }
     
-    void showData() {
-        cout << getBrand() << endl;
-        cout << getModel() << endl;
+};
+
+class ElectricCar : public Car {
+public:
+    ElectricCar(string Brand, string Model) : Car(Brand, Model) {}
+
+    void accelerate() override {
+        cout << "Electric car accelerates faster";
     }
 };
 
 
 int main() {
-    Car car1("Toyota", "Corolla");
-    car1.showData();
+    Vehicle vehicle1("Toyota", "Corolla");
+    vehicle1.accelerate();
 
-    car1.brandModel("Audi", "A4");
-    car1.showData();
-
-    // Próba wywołania brand oraz model bezpośrednio w main() powoduje błąd kompilacji
-    // Metody setBrand i setModel pozwalają na modyfikację prywatnych atrybutów brand i model
-    // cout << car1.brand << endl; 
-    // cout << car1.model << endl;
+    ElectricCar electricCar1("Tesla", "S");
+    electricCar1.accelerate();
 
     return 0;
 }
