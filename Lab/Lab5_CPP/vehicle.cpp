@@ -16,35 +16,46 @@ public:
         cout << "Vehicle accelerates" << endl;
     }
 
+    virtual ~Vehicle() {}
+
 };
 
-class Car : public Vehicle {
+class Engine : virtual public Vehicle {
 public:
 
-    Car(string Brand, string Model) : Vehicle(Brand, Model) {}
+    Engine(string Brand, string Model) : Vehicle(Brand, Model) {}
 
     void accelerate() override {
         cout << "Car accelerates" << endl;
     }
-    
+
 };
 
-class ElectricCar : public Car {
+class Electric : virtual public Vehicle {
 public:
-    ElectricCar(string Brand, string Model) : Car(Brand, Model) {}
+    Electric(string Brand, string Model) : Vehicle(Brand, Model) {}
 
     void accelerate() override {
-        cout << "Electric car accelerates faster";
+        cout << "Electric car accelerates faster" << endl;
     }
 };
 
+class Hybrid : public Engine, public Electric {
+public:
+    Hybrid(string Brand, string Model) : Vehicle(Brand, Model), Engine(Brand, Model), Electric(Brand, Model) {}
+
+    void accelerate() override {
+
+        Engine :: accelerate();
+        Electric :: accelerate();
+
+    }
+};
 
 int main() {
-    Vehicle vehicle1("Toyota", "Corolla");
-    vehicle1.accelerate();
 
-    ElectricCar electricCar1("Tesla", "S");
-    electricCar1.accelerate();
+    Hybrid hybrid1("Toyota", "Corolla");
+    hybrid1.accelerate();  
 
     return 0;
 }
