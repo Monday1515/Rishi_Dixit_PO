@@ -42,7 +42,7 @@ public:
 };
 
 int main() {
-    Teacher teacher1("Nauczyciel Matematyki", 5220.50);
+    Teacher teacher1("Nauczyciel Matematyki", 5220.50); // proszę tworzyć obiekty także w pamięci dynamicznej
     Administration administration1("Technik", 4500.75);
 
     teacher1.showData();
