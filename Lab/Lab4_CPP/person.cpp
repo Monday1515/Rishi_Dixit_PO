@@ -47,7 +47,7 @@ void setAge(int Age) {
     }
 
 void setEmail(const string& Email) {
-        regex pattern(R"(\w+@\w+)"); 
+        regex pattern(R"(\w+@\w+)");  \\ brawo za wyrażenia regularne; swoją drogą, w adresie mailowym mogą występować nie tylko litery
         if (regex_search(Email, pattern)) {
             email = Email;
         } 
