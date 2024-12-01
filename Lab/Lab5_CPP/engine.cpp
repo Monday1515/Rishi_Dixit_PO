@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> // trudno przypisać te rozwiązania do poszczególnych zadań; na przyszłość, proszę wyraźnie wskazywać numery (!) zadań
 
 using namespace std;
 
