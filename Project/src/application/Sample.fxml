@@ -16,7 +16,7 @@
          <children>
             <Pane fx:id="pane1" layoutX="225.0" layoutY="150.0" prefHeight="300.0" prefWidth="350.0" style="-fx-background-color: #444b91; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 2);">
                <children>
-               	  <TextField fx:id="usernameField" alignment="CENTER" layoutX="85.0" layoutY="79.0" prefHeight="25.0" prefWidth="179.0" promptText="Username" />
+               	  <TextField fx:id="usernameField" alignment="CENTER" layoutX="85.0" layoutY="79.0" prefHeight="25.0" prefWidth="179.0" promptText="e-mail or id" />
                   <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="85.0" layoutY="114.0" prefHeight="25.0" prefWidth="179.0" promptText="Password" />
                   <Button contentDisplay="CENTER" layoutX="140.0" layoutY="178.0" mnemonicParsing="false" onMouseClicked="#handleLogin" prefHeight="20.0" prefWidth="70.0" style="-fx-background-color: #282854; -fx-border-radius: 20;" text="Login" textFill="WHITE">
                      <cursor>
@@ -57,14 +57,14 @@
                   </Label>
                   <TextField fx:id="emailField" alignment="CENTER" layoutX="100.0" layoutY="75.0" prefHeight="25.0" promptText="E-mail" />
                   <TextField fx:id="usernameField1" alignment="CENTER" layoutX="100.0" layoutY="120.0" promptText="Username" />
+                  <PasswordField fx:id="passwordField1" alignment="CENTER" layoutX="100.0" layoutY="165.0" promptText="Password" />
                   <PasswordField fx:id="passwordField2" alignment="CENTER" layoutX="100.0" layoutY="210.0" promptText="Repeat Password" />
-                  <Button layoutX="145.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" style="-fx-background-color: #282854; -fx-border-radius: 20;" text="Register" textFill="WHITE">
+                  <Button focusTraversable="false" layoutX="145.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" style="-fx-background-color: #282854; -fx-border-radius: 20;" text="Register" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <PasswordField fx:id="passwordField1" alignment="CENTER" layoutX="100.0" layoutY="165.0" promptText="Password" />
-                  <Button layoutX="155.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleBackButtonClick" style="-fx-background-color: #282854; -fx-border-radius: 20;" text="Back" textFill="WHITE">
+                  <Button focusTraversable="false" layoutX="155.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#handleBackButtonClick" style="-fx-background-color: #282854; -fx-border-radius: 20;" text="Back" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

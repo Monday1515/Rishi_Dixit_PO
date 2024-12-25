@@ -8,6 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import java.util.regex.*;
 
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class SampleController {
 	
 	@FXML
@@ -53,7 +59,6 @@ public class SampleController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         
-        // verification of the correctness of the entered data
         if (username.isEmpty()) {
             errorLabel.setText("Empty username");
         } else if (password.isEmpty()) {
@@ -67,7 +72,7 @@ public class SampleController {
     	}
         
         private void sendLoginData(String username, String password) {
-            // sending to server
+        	
             System.out.println("Logging in: " + username); // To DO...
         }
 	
@@ -84,14 +89,23 @@ public class SampleController {
             Matcher matcher = pattern.matcher(email);
             return matcher.matches();
         }
+     
+    @FXML
+    private void clearFields() {
+        emailField.setText("");
+        usernameField1.setText("");
+        passwordField1.setText("");
+        passwordField2.setText("");
+    }
         
+        
+    @FXML
     public void handleRegister() {
     	String email = emailField.getText();
     	String username = usernameField1.getText();
         String password = passwordField1.getText();
         String passwordRepeat = passwordField2.getText();
         
-        // verification of the correctness of the entered data
         if (username.isEmpty()) {
             errorRegisterLabel.setText("Empty username");
         } else if (!validateEmail(email)) {
@@ -105,7 +119,32 @@ public class SampleController {
         } else {
         	errorRegisterLabel.setStyle("-fx-text-fill: #007830;");
             errorRegisterLabel.setText("Register sucessful");
-            //sendLoginData(username, password); TO DO...
+            saveToDatabase(email, username, password);
+            clearFields();
+        }
+
+    }
+    
+    private boolean saveToDatabase(String email, String username, String password) {
+        try (Connection connection = DriverManager.getConnection(
+                "jdbc:postgresql://localhost:5432/postgres", "postgres", "password")) {
+
+            String query = "INSERT INTO users (email, username, password) VALUES (?, ?, ?)";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, email);
+                stmt.setString(2, username);
+                stmt.setString(3, password);	
+
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
         
@@ -113,12 +152,15 @@ public class SampleController {
 	private void handleLabelClick() {
 		 pane1.setVisible(false);
 		 pane2.setVisible(true);
+		 errorRegisterLabel.requestFocus();
 	}
 	
 	@FXML
 	private void handleBackButtonClick() {
+		clearFields();
 		pane1.setVisible(true);
 		pane2.setVisible(false);
+		
 	}
 }
 

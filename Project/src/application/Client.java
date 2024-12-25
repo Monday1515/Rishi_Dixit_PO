@@ -1,67 +1,33 @@
 package application;
 
-import java.io.*;
-import java.net.*;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 
 public class Client {
-    private static final String SERVER_ADDRESS = "localhost";  // Adres serwera
-    private static final int PORT = 12345;  // Port serwera
-    private Socket socket;
-    private PrintWriter out;
-    private BufferedReader in;
-    private BufferedReader userInput;
 
-    public static void main(String[] args) {
-        Client client = new Client();
-        client.start();
-    }
+    public static void sendRegistrationData(String email, String username, String password) {
+        String userData = "username=" + username + "&password=" + password + "&email=" + email;
 
-    public void start() {
         try {
-            socket = new Socket(SERVER_ADDRESS, PORT);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
-            userInput = new BufferedReader(new InputStreamReader(System.in));
+            URI uri = new URI("http://localhost:8080/register");
+            URL url = uri.toURL(); 
 
-            // Odczytanie powitania z serwera
-            String response = in.readLine();
-            System.out.println(response);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            // Wysłanie nazwy użytkownika
-            String username = userInput.readLine();
-            out.println(username);
-
-            // Tworzenie wątku do odbierania wiadomości
-            new Thread(new IncomingMessageHandler()).start();
-
-            // Wysłanie wiadomości do serwera
-            String message;
-            while (true) {
-                message = userInput.readLine();
-                out.println(message);
-                if (message.equalsIgnoreCase("exit")) {
-                    break;
-                }
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(userData.getBytes());
+                os.flush();
             }
 
-            socket.close();
-        } catch (IOException e) {
+            int responseCode = conn.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    // Wątek do odbierania wiadomości
-    private class IncomingMessageHandler implements Runnable {
-        @Override
-        public void run() {
-            try {
-                String message;
-                while ((message = in.readLine()) != null) {
-                    System.out.println(message);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
