@@ -119,35 +119,14 @@ public class SampleController {
         } else {
         	errorRegisterLabel.setStyle("-fx-text-fill: #007830;");
             errorRegisterLabel.setText("Register sucessful");
-            saveToDatabase(email, username, password);
+            
+            Client.sendRegistrationData(email, username, password);
+
             clearFields();
         }
 
     }
     
-    private boolean saveToDatabase(String email, String username, String password) {
-        try (Connection connection = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/postgres", "postgres", "password")) {
-
-            String query = "INSERT INTO users (email, username, password) VALUES (?, ?, ?)";
-            try (PreparedStatement stmt = connection.prepareStatement(query)) {
-                stmt.setString(1, email);
-                stmt.setString(2, username);
-                stmt.setString(3, password);	
-
-                int rowsAffected = stmt.executeUpdate();
-                return rowsAffected > 0;
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-        
 	@FXML
 	private void handleLabelClick() {
 		 pane1.setVisible(false);
