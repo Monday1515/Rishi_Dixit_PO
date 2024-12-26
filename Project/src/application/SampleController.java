@@ -67,14 +67,11 @@ public class SampleController {
             errorLabel.setText("Password must include at least one uppercase letter, one digit, and one special character!");
         } else {
             errorLabel.setText("");
-            sendLoginData(username, password);
+            Client.sendLoginData(username, password);
         }
-    	}
-        
-        private void sendLoginData(String username, String password) {
-        	
-            System.out.println("Logging in: " + username); // To DO...
-        }
+    }
+
+	
 	
         private boolean validatePassword(String input) {
             String regex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!]).*$";
@@ -116,12 +113,10 @@ public class SampleController {
             errorRegisterLabel.setText("Password must include at least one uppercase letter, one digit, and one special character!");
         } else if (!password.equals(passwordRepeat)) {
         	errorRegisterLabel.setText("Passwords do not match. Try again.");
-        } else {
-        	errorRegisterLabel.setStyle("-fx-text-fill: #007830;");
-            errorRegisterLabel.setText("Register sucessful");
-            
+        } else {           
             Client.sendRegistrationData(email, username, password);
-
+            errorRegisterLabel.setStyle("-fx-text-fill: #007830;");
+            errorRegisterLabel.setText("Register sucessful");
             clearFields();
         }
 
