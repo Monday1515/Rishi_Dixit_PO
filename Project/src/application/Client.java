@@ -1,5 +1,7 @@
 package application;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -11,7 +13,7 @@ public class Client {
         String userData = "username=" + username + "&password=" + password + "&email=" + email;
 
         try {
-            URI uri = new URI("http://192.168.1.10:8080/register");
+            URI uri = new URI("http://192.168.1.12:8080/register");
             URL url = uri.toURL(); 
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -23,15 +25,23 @@ public class Client {
                 os.write(userData.getBytes());
                 os.flush();
             }
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                String inputLine;
+                StringBuilder response = new StringBuilder();
 
-            int responseCode = conn.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                System.out.println("Response from: " + url + " | " + response.toString());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    public static void sendLoginData(String email, String password) {
+    public static boolean sendLoginData(String email, String password) {
     	String loginData = "email=" + email + "&password=" + password;
     	
     	try {
@@ -48,12 +58,23 @@ public class Client {
                 os.flush();
             }
             
-            int responseCode = conn.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
-    	}
-    	
-    	catch (Exception e) {
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                System.out.println("Response from: " + url + "| " + response.toString());
+                if (response.toString().equals("ac: 0")) {
+                	return true;
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-    	}
+        }
+		return false;
+    
     }
 }

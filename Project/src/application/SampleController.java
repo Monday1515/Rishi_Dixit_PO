@@ -1,18 +1,21 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.PasswordField;
+
+import java.io.IOException;
 import java.util.regex.*;
-
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class SampleController {
 	
@@ -54,8 +57,8 @@ public class SampleController {
 	    pane1.setVisible(true); 
 	    pane2.setVisible(false); 
 	}
-	
-	public void handleLogin() {
+	@FXML
+	public void handleLogin(MouseEvent event) throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
         
@@ -67,7 +70,20 @@ public class SampleController {
             errorLabel.setText("Password must include at least one uppercase letter, one digit, and one special character!");
         } else {
             errorLabel.setText("");
-            Client.sendLoginData(username, password);
+            if (Client.sendLoginData(username, password) == true) {
+            	
+            	Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	            loginStage.close();
+	            
+	            BorderPane loader = (BorderPane)FXMLLoader.load(getClass().getResource("mainAppWindow.fxml"));
+
+	            Stage newStage = new Stage();
+	            newStage.setScene(new Scene(loader));
+	            newStage.setTitle("Nowe Okno");
+	            
+	            newStage.show();
+            }
+            
         }
     }
 

@@ -8,12 +8,14 @@ import javafx.fxml.FXMLLoader;
 
 
 
+
+
 public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("loginRegister.fxml"));
 		    
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -21,8 +23,7 @@ public class Main extends Application {
 			primaryStage.setTitle("Main");
 			primaryStage.setResizable(false);
 			primaryStage.show();
-			
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
