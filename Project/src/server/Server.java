@@ -31,7 +31,7 @@ public class Server {
 
                 InputStream is = exchange.getRequestBody();
                 String requestBody = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-                String response = "Failed to register user.";
+                String response = "rc: 1";
 
                 if (requestBody != null && requestBody.contains("username")) {
                     String[] data = requestBody.split("&");
@@ -40,9 +40,10 @@ public class Server {
                     String email = data[2].split("=")[1];
 
                     boolean success = saveToDatabase(username, password, email);
-                    response = success ? "User registered successfully!" : "Failed to register user.";
+                    response = success ? "rc: 0" : "rc: 1";
                 }
-
+                
+                exchange.getResponseHeaders().set("Content-Type", "text/plain");
                 exchange.sendResponseHeaders(200, response.getBytes().length);
                 OutputStream os = exchange.getResponseBody();
                 os.write(response.getBytes());
@@ -60,8 +61,8 @@ public class Server {
                 InputStream is = exchange.getRequestBody();
                 String requestBody = new String(is.readAllBytes(), StandardCharsets.UTF_8);
 
-                String response = "Invalid email or password";
-
+                String response = "ac: 1";
+                
                 if (requestBody != null && requestBody.contains("email")) {
                     String[] data = requestBody.split("&");
                     String password = data[1].split("=")[1];
@@ -70,11 +71,14 @@ public class Server {
                     if (email != null && password != null) {
                         boolean authentication = authenticate(email, password);
                         if (authentication) {
-                            response = "Authentication successful!";
+                            response = "ac: 0";
                         }
+                        
+                        System.out.println(response);
                     }
                 }
-
+                
+                exchange.getResponseHeaders().set("Content-Type", "text/plain");
                 exchange.sendResponseHeaders(200, response.getBytes().length);
                 OutputStream os = exchange.getResponseBody();
                 os.write(response.getBytes());
