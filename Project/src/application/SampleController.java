@@ -14,7 +14,6 @@ import javafx.scene.control.PasswordField;
 import java.io.IOException;
 import java.util.regex.*;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class SampleController {
@@ -52,6 +51,8 @@ public class SampleController {
 	@FXML
 	private AnchorPane pane2;
 	
+	
+	
 	@FXML
 	public void initialize() {
 	    pane1.setVisible(true); 
@@ -71,7 +72,7 @@ public class SampleController {
         } else {
             errorLabel.setText("");
             if (Client.sendLoginData(username, password) == true) {
-            	
+                
             	Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 	            loginStage.close();
 	            
@@ -82,6 +83,7 @@ public class SampleController {
 	            newStage.setTitle("Nowe Okno");
 	            
 	            newStage.show();
+	            
             }
             
         }

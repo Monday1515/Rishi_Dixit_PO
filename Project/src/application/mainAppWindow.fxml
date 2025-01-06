@@ -1,33 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #3c4554;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #3c4554;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.mainAppController">
+   <top>
+      <Pane fx:id="pane3" prefHeight="835.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutX="14.0" layoutY="34.0" prefHeight="700.0" prefWidth="200.0" style="-fx-background-color: #444b91; -fx-background-radius: 20;" />
-            <Pane layoutX="782.0" layoutY="34.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #444b91;">
+            <SVGPath fx:id="searchIcon" content="M 59.999955,0 A 60.00007,60.00007 0 0 0 0,59.999955 60.00007,60.00007 0 0 0 59.999955,119.99991 60.00007,60.00007 0 0 0 94.201485,109.15561 L 140.00024,153.9999 153.9999,140.00024 105.55635,99.008944 A 60.00007,60.00007 0 0 0 119.99991,59.999955 60.00007,60.00007 0 0 0 59.999955,0 Z m 0,18.947681 A 41.052674,41.052674 0 0 1 101.05223,59.999955 41.052674,41.052674 0 0 1 59.999955,101.05223 41.052674,41.052674 0 0 1 18.947681,59.999955 41.052674,41.052674 0 0 1 59.999955,18.947681 Z" fill="#dddddd" layoutX="612.0" layoutY="-4.0" onMouseEntered="#hoverSearchIcon" onMouseExited="#resetSearchIcon" scaleX="0.2" scaleY="0.2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></SVGPath>
+            <Pane layoutX="31.0" layoutY="34.0" prefHeight="700.0" prefWidth="200.0" style="-fx-background-color: #444b91; -fx-background-radius: 20;">
+               <children>
+                  <Label layoutX="65.0" layoutY="14.0" text="Friend list" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+            <Pane layoutX="790.0" layoutY="34.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #444b91;">
                <children>
                   <Label layoutX="54.0" layoutY="14.0" text="Notifications" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
+                  <Slider layoutX="175.0" layoutY="30.0" orientation="VERTICAL" />
                </children>
             </Pane>
-            <TextField layoutX="342.0" layoutY="55.0" prefHeight="40.0" prefWidth="340.0" />
-            <Pane layoutX="312.0" layoutY="134.0" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #444b91;" />
-            <Label layoutX="490.0" layoutY="34.0" text="Search" textAlignment="CENTER" textFill="WHITE">
+            <TextField layoutX="319.0" layoutY="53.0" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #f0f0f0; -fx-border-width: 5; -fx-padding: 10; -fx-border-radius: 10;" />
+            <Label layoutX="466.0" layoutY="34.0" text="Search" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
+            <SVGPath fx:id="settingIcon" content="m 80.06488,60.966821 -6.877099,15.973702 a 64.105797,64.468651 0 0 0 -7.902877,3.288172 L 49.108114,73.789811 29.717049,93.180876 36.256702,109.6083 a 64.105797,64.468651 0 0 0 -3.032373,7.49825 l -16.329753,7.03109 v 27.42313 l 16.330269,7.0311 a 64.105797,64.468651 0 0 0 3.031857,7.49825 l -6.539653,16.42742 19.391065,19.39107 16.17679,-6.4394 a 64.105797,64.468651 0 0 0 7.90236,3.28817 l 6.877616,15.9737 h 27.42313 l 6.87762,-15.97319 a 64.105797,64.468651 0 0 0 7.90288,-3.28868 l 16.17627,6.4394 19.39106,-19.39107 -6.53913,-16.42742 a 64.105797,64.468651 0 0 0 3.03237,-7.49877 l 16.32975,-7.03058 v -27.42313 l -16.32975,-7.03058 a 64.105797,64.468651 0 0 0 -3.03237,-7.49876 l 6.53913,-16.427424 -19.39106,-19.391065 -16.17627,6.438884 a 64.105797,64.468651 0 0 0 -7.9034,-3.288688 l -6.8771,-15.973186 z m 13.711825,41.550439 a 35.132938,35.331802 0 0 1 35.132735,35.33169 35.132938,35.331802 0 0 1 -35.132735,35.33169 35.132938,35.331802 0 0 1 -35.132739,-35.33169 35.132938,35.331802 0 0 1 35.132739,-35.33169 z" fill="#dddddd" layoutX="830.0" layoutY="581.0" onMouseEntered="#hoverSettingIcon" onMouseExited="#resetSettingIcon" scaleX="0.2" scaleY="0.2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </SVGPath>
+            <SVGPath fx:id="exitIcon" content="M 8.9637939,0 C 3.9979922,0 0,3.9979922 0,8.9637939 V 18.459338 141.3893 h 0.0449585 v 3.41116 c 0,4.96581 3.9974754,8.9638 8.9632772,8.9638 H 78.692354 c 4.965802,0 8.963278,-3.99799 8.963278,-8.9638 v -9.49554 c 0,-4.9658 -3.997476,-8.96379 -8.963278,-8.96379 H 27.423132 V 27.423132 h 51.224264 c 4.965802,0 8.963277,-3.997992 8.963277,-8.963794 V 8.9637939 C 87.610673,3.9979922 83.613198,0 78.647396,0 Z M 125.00012,55.668953 V 69.382328 H 74.120024 c -2.282379,0 -4.120162,1.837267 -4.120162,4.119645 v 6.760311 c 0,2.282379 1.837783,4.119646 4.120162,4.119646 h 50.880096 v 13.713374 l 28.76414,-21.213175 z" fill="#dddddd" layoutX="898.0" layoutY="642.0" onMouseEntered="#hoverExitIcon" onMouseExited="#resetExitIcon" scaleX="0.2" scaleY="0.2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></SVGPath>
          </children>
       </Pane>
-   </center>
+   </top>
 </BorderPane>
