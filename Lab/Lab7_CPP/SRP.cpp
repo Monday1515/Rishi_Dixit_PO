@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> // poprawnie; ale, dlaczego tylko 2 zadanie z pięciu?
 #include <string>
 #include <fstream>
 
