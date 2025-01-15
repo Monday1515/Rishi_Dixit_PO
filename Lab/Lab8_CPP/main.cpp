@@ -12,7 +12,7 @@ public:
 
 class Car : public Vehicle {
 public:
-    void build() override {
+    void build() override {  // ta metoda (jej treść) powinna być zdefiniowana w klasie VehicleFactory i pochodnych
         cout << "Car production starts\n";
         Sleep(2000);
         cout << "Car production finished\n";
@@ -30,7 +30,7 @@ public:
 
 class VehicleFactory {
 public:
-    static Vehicle* create(const string& x) {
+    static Vehicle* create(const string& x) {  // przydałyby się klasy pochodne dla VehicleFactory w miejsce poniższej instrukcji warunkowej (zasda open/closed) 
         if (x == "car") {
             return new Car();
         } 
