@@ -1,4 +1,4 @@
-class Rectangle {
+class Rectangle {  // poprawnie
 	
     private double width;
     private double height;
