@@ -1,5 +1,5 @@
 
-interface Discount {
+interface Discount {  // poprawnie
     double discount(double price);
 }
 
