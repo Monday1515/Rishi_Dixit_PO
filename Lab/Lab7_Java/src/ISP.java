@@ -1,4 +1,4 @@
-interface Printer {
+interface Printer {   // poprawnie
 	
     void print(String document);
 }
