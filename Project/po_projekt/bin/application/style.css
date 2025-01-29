@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2f2f40; 
+    color: #e0e0e0; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #535380;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    width: 300px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #e0e0e0;
+	text-align: center;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 80%;
+	display:block;
+    padding: 10px;
+	margin: 0 auto;
+	text-align: center;
+    margin-bottom: 10px;
+    border: 1px solid #333333; 
+    border-radius: 20px;
+    background: #2b2b2b;
+    color: #ffffff; 
+}
+
+input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="email"]::placeholder {
+    color: #a0a0a0;
+}
+
+button {
+	display: block;
+	margin: 0 auto;
+    width: 45%;
+    padding: 10px;
+    background: #369651;
+    color: #ffffff; 
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #256336;
+}
+
+.message {
+    text-align: center;
+    margin-top: 10px;
+    color: #ff6b6b;
+    font-size: 14px;
+}

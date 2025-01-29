@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komunikator - Strona główna</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="friends-list-container">
+            <div class="pending-invites">
+                <h2>Oczekujące zaproszenia</h2>
+                <ul>
+                    <li>Zaproszenie 1</li>
+                    <li>Zaproszenie 2</li>
+                    <li>Zaproszenie 3</li>
+                </ul>
+            </div>
+            <div class="friends">
+                <h2>Lista znajomych</h2>
+                <ul>
+                    <li>Znajomy 1</li>
+                    <li>Znajomy 2</li>
+                    <li>Znajomy 3</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="header">
+                <h1>Witaj Spowrotem!</h1>
+                <input type="text" id="searchInput" placeholder="Wyszukaj..." oninput="searchUsers()">
+            </div>
+            <div class="results" id="results"></div>
+        </div>
+    </div>
+
+    <div id="notificationContainer" class="notification-container">
+        <p id="notificationMessage"></p>
+    </div>
+
+    <script>
+        function searchUsers() {
+            const input = document.getElementById("searchInput").value;
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = ""; 
+
+            if (input.trim() === "") {
+                return; 
+            }
+
+            fetch(`/search?q=${encodeURIComponent(input)}`)
+                .then(response => response.text())
+                .then(data => {
+                    if (data) {
+                        resultsDiv.innerHTML = data;
+                    } else {
+                        resultsDiv.innerHTML = "<p>Brak wyników.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error('Błąd:', error);
+                    resultsDiv.innerHTML = "<p>Wystąpił błąd podczas wyszukiwania.</p>";
+                });
+        }
+
+		function addFriend(userId) {
+		    const senderId;
+		    const receiverId;
+
+		    fetch('/addFriend', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/x-www-form-urlencoded',
+		        },
+		        body: `senderId=${encodeURIComponent(senderId)}&receiverId=${encodeURIComponent(receiverId)}`
+		    })
+		    .then(response => response.text())
+		    .then(data => {
+		        showNotification(data);
+		    })
+		    .catch(error => {
+		        console.error('Błąd:', error);
+		        showNotification("Wystąpił błąd przy wysyłaniu zaproszenia.");
+		    });
+
+		    showNotification(`Zaproszenie do znajomych wysłane do użytkownika o ID: ${userId}`);
+		}
+
+		 function showNotification(message) {
+		            const notificationContainer = document.getElementById("notificationContainer");
+		            const notificationMessage = document.getElementById("notificationMessage");
+		            notificationMessage.innerText = message;
+
+		            notificationContainer.style.display = "block";
+
+		            setTimeout(() => {
+		                notificationContainer.style.display = "none";
+		            }, 3000);
+		        }
+		    </script>
+		</body>
+		</html>
